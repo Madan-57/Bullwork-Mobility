@@ -1,3 +1,36 @@
+// const { Pool } = require('pg');
+// require('dotenv').config();
+
+// // const pool = new Pool({
+// //   user: process.env.DB_USER,
+// //   host: process.env.DB_HOST,
+// //   database: process.env.DB_NAME,
+// //   password: process.env.DB_PASSWORD,
+// //   port: process.env.DB_PORT,
+// // });
+
+
+
+// const pool = new Pool({
+//   user: process.env.DB_USER,
+//   host: process.env.DB_HOST,
+//   database: process.env.DB_,
+//   password: process.env.DB_PASSWORD,
+//   port: process.env.DB_PORT,
+//   ssl: {
+//       rejectUnauthorized: false // WARNING: Use 'rejectUnauthorized: false' for development/testing only.
+//                                 // For production, always use 'rejectUnauthorized: true' and provide a CA certificate.
+//       // For production, uncomment the line below and replace 'path/to/your/aiven_ca.pem'
+//       // with the actual path to the Aiven CA certificate file you download.
+//       // ca: fs.readFileSync('path/to/your/aiven_ca.pem').toString(),
+//   },
+// });
+
+// module.exports = pool;
+
+
+
+
 const { Pool } = require('pg');
 require('dotenv').config();
 
@@ -6,7 +39,10 @@ const pool = new Pool({
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
+  port: Number(process.env.DB_PORT),
+  ssl: {
+    rejectUnauthorized: false, // Safe for Aiven + Render deployment
+  },
 });
 
 module.exports = pool;
